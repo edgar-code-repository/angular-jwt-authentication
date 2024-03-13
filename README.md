@@ -1,6 +1,6 @@
-ANGULAR AUTHENTICATION WITH JWT
+JWT AUTHENTICATION WITH ANGULAR
 ----------------------------------------------------------------------------------------------
 
-Application created with Angular 14.2.
+Application created with Angular 14.
 
 ----------------------------------------------------------------------------------------------
