@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         console.log("[LoginComponent][Successful authentication!!!][user: " + response.username + "]");
         console.log("[LoginComponent][Successful authentication!!!][token: " + response.token + "]");
 
-        //this.router.navigateByUrl("main");X
+        //this.router.navigateByUrl("main");
       },
       error: (error) => {
         console.log("[LoginComponent][Authentication failed!!!][Error status: " + error.status + "]");
