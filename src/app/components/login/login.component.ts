@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { User } from '../../model/user';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +19,12 @@ export class LoginComponent implements OnInit {
     password: ""
   };  
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(submittedForm:any) {
-    //console.log(submittedForm);
 
     if (submittedForm.invalid) {
       return false;
@@ -34,6 +35,14 @@ export class LoginComponent implements OnInit {
   
     console.log(this.user.username);
     console.log(this.user.password);
+
+    if(this.authenticationService.authenticate(this.user)) {
+      this.router.navigateByUrl("main");
+    }
+    else {
+      this.errorMessage = "Authentication failed!!!";
+      this.blnLoginError = true;
+    }    
 
     return true;
   }

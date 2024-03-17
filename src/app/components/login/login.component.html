@@ -63,7 +63,19 @@
                                     </button>
                                     
                                     <br/>
-                                </form>                               
+                                </form>      
+                                
+                                <div *ngIf="blnLoginError == true">
+                                    <div class="text-center">
+                                        <br/><br/>
+                                        {{ errorMessage }}
+                                        <br/><br/><br/><br/><br/>
+                                        <button type="button" (click)="onClickBack()" class="btn btn-primary btn-user btn-block">
+                                            Volver
+                                        </button> 
+                                        <br/><br/><br/>
+                                    </div>                                    
+                                </div>                                
 
                             </div>
                         </div>
