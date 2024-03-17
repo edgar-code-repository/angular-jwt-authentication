@@ -33,11 +33,28 @@ export class LoginComponent implements OnInit {
     this.user.username = submittedForm.value.loginEmail;
     this.user.password = submittedForm.value.loginPassword;
   
-    console.log(this.user.username);
-    console.log(this.user.password);
+    console.log("Username:" + this.user.username);
+    console.log("Password:" + this.user.password);
 
     const authenticationObservable = this.authenticationService.authenticate(this.user);
-    authenticationObservable.subscribe(
+    authenticationObservable.subscribe({
+      next: (response: any) => {
+        console.log("[LoginComponent][Successful authentication!!!][user: " + response.username + "]");
+        console.log("[LoginComponent][Successful authentication!!!][token: " + response.token + "]");
+
+        //this.router.navigateByUrl("main");X
+      },
+      error: (error) => {
+        console.log("[LoginComponent][Authentication failed!!!][Error status: " + error.status + "]");
+        console.log("[LoginComponent][Authentication failed!!!][Error body code: " + error.error.code + "]");        
+        console.log("[LoginComponent][Authentication failed!!!][Error body message: " + error.error.message + "]");        
+
+        this.errorMessage = error.error.message;
+        this.blnLoginError = true;        
+      }
+    });
+
+    /*authenticationObservable.subscribe(
       (data: any) => {
         console.log("[LoginComponent][Successful authentication!!!][token: " + data.token + "]");
 
@@ -49,7 +66,7 @@ export class LoginComponent implements OnInit {
         this.errorMessage = "Authentication failed!!!";
         this.blnLoginError = true;        
       }
-    );
+    );*/    
     
     return true;
   }
