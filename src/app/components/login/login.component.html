@@ -19,7 +19,7 @@
                                 <br/><br/>
                                 </div>
 
-                                <form class="user">
+                                <form class="user" (ngSubmit)="onSubmit(form)" #form="ngForm" *ngIf="blnLoginError == false">
                                     <div class="form-group">
                                         <input  type="email" 
                                                 class="form-control form-control-user"
@@ -31,6 +31,7 @@
                                                 autofocus
                                                 required
                                                 minlength="3"
+                                                #usernameControl="ngModel"
                                                 >
                                     </div>
                                     <div class="form-group">
@@ -42,18 +43,27 @@
                                                 ngModel
                                                 required
                                                 minlength="3"
+                                                #passwordControl="ngModel"
                                                 >
                                     </div>
                                 
+                                    <span class="help-block" *ngIf="usernameControl.invalid && usernameControl.touched">
+                                        &nbsp;&nbsp;&nbsp;Please enter username!
+                                    </span>                                    
+
+                                    <br/>
+                                    <span class="help-block" *ngIf="passwordControl.invalid && passwordControl.touched">
+                                        &nbsp;&nbsp;&nbsp;Please enter password!
+                                    </span>
+                                
                                     <br/><br/>
 
-                                    <button type="button" routerLink="/main" class="btn btn-primary btn-user btn-block">
+                                    <button type="submit" class="btn btn-primary btn-user btn-block" [disabled]="form.invalid">
                                         Login
                                     </button>
                                     
                                     <br/>
-
-                                </form>
+                                </form>                               
 
                             </div>
                         </div>
