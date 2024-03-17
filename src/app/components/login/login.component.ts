@@ -36,14 +36,21 @@ export class LoginComponent implements OnInit {
     console.log(this.user.username);
     console.log(this.user.password);
 
-    if(this.authenticationService.authenticate(this.user)) {
-      this.router.navigateByUrl("main");
-    }
-    else {
-      this.errorMessage = "Authentication failed!!!";
-      this.blnLoginError = true;
-    }    
+    const authenticationObservable = this.authenticationService.authenticate(this.user);
+    authenticationObservable.subscribe(
+      (data: any) => {
+        console.log("[LoginComponent][Successful authentication!!!][token: " + data.token + "]");
 
+        this.router.navigateByUrl("main");
+      },
+      (error) => {
+        console.log("[LoginComponent][Authentication failed!!!][Error status: " + error.status + "]");
+
+        this.errorMessage = "Authentication failed!!!";
+        this.blnLoginError = true;        
+      }
+    );
+    
     return true;
   }
 
